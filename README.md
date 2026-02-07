@@ -282,6 +282,31 @@ cxr.close();
 | Languages | 13 | **15** |
 | Install size | ~500MB (transformers.js) | **~50MB** |
 
+## Contributors
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/NeuralRays">
+        <img src="https://github.com/NeuralRays.png" width="80" style="border-radius:50%" alt="NeuralRays"/>
+        <br />
+        <sub><b>NeuralRays</b></sub>
+      </a>
+      <br />
+      <sub>Creator & Maintainer</sub>
+    </td>
+    <td align="center">
+      <a href="https://claude.ai">
+        <img src="https://avatars.githubusercontent.com/u/76263028?s=200" width="80" style="border-radius:50%" alt="Claude"/>
+        <br />
+        <sub><b>Claude</b></sub>
+      </a>
+      <br />
+      <sub>AI Pair Programmer</sub>
+    </td>
+  </tr>
+</table>
+
 ## License
 
 MIT
