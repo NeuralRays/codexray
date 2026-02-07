@@ -1,0 +1,92 @@
+{
+  "name": "codexray",
+  "version": "2.0.0",
+  "description": "X-ray vision for your codebase — semantic knowledge graph that saves AI coding agents 30%+ tokens. Pre-built code intelligence for Claude Code, Cursor, Windsurf via MCP.",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "codexray": "dist/cli/index.js",
+    "cxr": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test",
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "keywords": [
+    "claude-code", "mcp", "model-context-protocol", "code-graph",
+    "semantic-search", "ast", "tree-sitter", "code-intelligence",
+    "knowledge-graph", "code-analysis", "explore-agents",
+    "token-optimization", "codegraph-alternative", "code-navigation",
+    "symbol-search", "impact-analysis", "call-graph", "dead-code",
+    "cursor", "windsurf", "ai-coding", "codebase-indexing",
+    "dependency-tree", "refactoring", "code-search", "claude",
+    "claude-code-mcp", "codegraph", "agentic-coding",
+    "vector-embeddings", "semantic-code-search", "complexity-analysis",
+    "hotspot-detection", "blast-radius", "code-quality"
+  ],
+  "author": "NeuralRays",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeuralRays/codexray.git"
+  },
+  "homepage": "https://github.com/NeuralRays/codexray#readme",
+  "bugs": {
+    "url": "https://github.com/NeuralRays/codexray/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0",
+  "os": ["darwin", "linux", "win32"],
+  "cpu": ["x64", "arm64"],
+  "files": [
+    "dist/",
+    "scripts/postinstall.js",
+    "CLAUDE.md",
+    "DOCS.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "commander": "^13.1.0",
+    "glob": "^11.0.0",
+    "micromatch": "^4.0.8",
+    "tree-sitter": "^0.22.4",
+    "tree-sitter-typescript": "^0.23.2",
+    "tree-sitter-javascript": "^0.23.1",
+    "tree-sitter-python": "^0.23.6",
+    "tree-sitter-go": "^0.23.4",
+    "tree-sitter-rust": "^0.23.2",
+    "tree-sitter-java": "^0.23.5",
+    "tree-sitter-c-sharp": "^0.23.1",
+    "tree-sitter-php": "^0.23.11",
+    "tree-sitter-ruby": "^0.23.1",
+    "tree-sitter-c": "^0.23.4",
+    "tree-sitter-cpp": "^0.23.4",
+    "tree-sitter-swift": "^0.7.1",
+    "tree-sitter-kotlin": "^0.3.8",
+    "chokidar": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/micromatch": "^4.0.9",
+    "@types/node": "^22.12.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}
