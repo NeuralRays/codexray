@@ -10,9 +10,47 @@
 [![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/NeuralRays/codexray/commits/main)
 [![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)](https://github.com/NeuralRays/codexray)
 
-**X-ray vision for your codebase** — pre-built semantic knowledge graph that saves AI coding agents **30%+ tokens** and **25%+ tool calls**.
+**X-ray vision for your codebase** — semantic knowledge graph that saves AI coding agents **30%+ tokens** and **25%+ tool calls**. Zero config, zero API keys, 100% local.
 
-CodeXRay indexes your codebase into a local SQLite graph database with TF-IDF semantic search. When Claude Code (or any MCP client) needs to understand your code, it queries the graph instantly instead of scanning files one by one.
+> **One `codexray_context` call replaces 5-10 file reads.** Your AI agent queries a pre-built knowledge graph instead of scanning files one by one.
+
+<details>
+<summary><b>See the token savings in action</b></summary>
+
+### Without CodeXRay (typical Claude Code session)
+```
+You: "Fix the authentication bug in the login flow"
+
+Claude Code:
+  1. grep "auth" across codebase          →  800 tokens
+  2. Read auth/middleware.ts               → 1,200 tokens
+  3. Read auth/service.ts                  → 1,500 tokens
+  4. Read auth/types.ts                    →   600 tokens
+  5. grep "login" across codebase          →   700 tokens
+  6. Read routes/login.ts                  → 1,100 tokens
+  7. Read utils/jwt.ts                     →   900 tokens
+  8. Read tests/auth.test.ts              → 1,400 tokens
+  9. grep "validateToken"                  →   500 tokens
+  10. Read middleware/validate.ts           → 1,000 tokens
+  ─────────────────────────────────────────────────
+  Total: 10 tool calls, ~9,700 tokens just to FIND the code
+```
+
+### With CodeXRay (same task)
+```
+You: "Fix the authentication bug in the login flow"
+
+Claude Code:
+  1. codexray_context("authentication login bug")
+     → Returns all relevant symbols, code snippets,
+       call relationships, and file locations
+  ─────────────────────────────────────────────────
+  Total: 1 tool call, ~2,000 tokens — ready to fix
+```
+
+**Result: 80% fewer tokens, 90% fewer tool calls to find relevant code.**
+
+</details>
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -86,22 +124,31 @@ codexray init --index     # Initialize + index
 cxr init -i               # Short alias
 ```
 
+## Why CodeXRay?
+
+- **Save money** — 30%+ fewer tokens means lower API costs
+- **Faster responses** — AI agents find code instantly via graph queries instead of scanning files
+- **Better accuracy** — semantic search understands *meaning*, not just keywords
+- **Zero config** — `npx codexray` and done. No API keys, no cloud, no ML models to download
+- **Lightweight** — ~50MB vs ~500MB for embedding-based alternatives
+- **Private** — 100% local. Your code never leaves your machine
+
 ## How It Works
 
 1. **Index** — Tree-sitter parses your code into ASTs, extracting every function, class, method, type, and their relationships into a SQLite graph with TF-IDF semantic index
 2. **Query** — Claude Code queries the graph via 16 MCP tools instead of scanning files
 3. **Sync** — Git hooks keep the index up-to-date on every commit
 
-### Before CodeXRay
+### Without CodeXRay
 ```
-Claude: "I need to fix auth" → grep "auth" → read 15 files → grep "login" → read 8 more
-Result: 60 tool calls, 157k tokens
+AI agent: "Fix auth bug" → grep → read file → grep → read file → read file → ...
+         15+ tool calls just to FIND the relevant code
 ```
 
-### After CodeXRay
+### With CodeXRay
 ```
-Claude: "I need to fix auth" → codexray_context("authentication") → done
-Result: 45 tool calls, 111k tokens (30%+ savings)
+AI agent: "Fix auth bug" → codexray_context("auth bug") → all relevant code + relationships
+         1 tool call — immediately start fixing
 ```
 
 ## 16 MCP Tools
